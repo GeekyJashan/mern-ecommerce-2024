@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { endpoints } from "../../../config/api";
 
 const initialState = {
   isLoading: false,
@@ -7,62 +8,52 @@ const initialState = {
 };
 
 export const addNewProduct = createAsyncThunk(
-  "/products/addnewproduct",
+  "products/addNewProduct",
   async (formData) => {
-    const result = await axios.post(
-      "http://localhost:5001/api/admin/products/add",
+    const response = await axios.post(
+      `${endpoints.admin.products.base}/add`,
       formData,
       {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       }
     );
-
-    return result?.data;
+    return response.data;
   }
 );
 
 export const fetchAllProducts = createAsyncThunk(
-  "/products/fetchAllProducts",
+  "products/fetchAllProducts",
   async () => {
-    const result = await axios.get(
-      "http://localhost:5001/api/admin/products/get"
-    );
-
-    return result?.data;
+    const response = await axios.get(`${endpoints.admin.products.base}/get`);
+    return response.data;
   }
 );
 
 export const editProduct = createAsyncThunk(
-  "/products/editProduct",
+  "products/editProduct",
   async ({ id, formData }) => {
-    const result = await axios.put(
-      `http://localhost:5001/api/admin/products/edit/${id}`,
+    const response = await axios.put(
+      `${endpoints.admin.products.base}/edit/${id}`,
       formData,
       {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       }
     );
-
-    return result?.data;
+    return response.data;
   }
 );
 
 export const deleteProduct = createAsyncThunk(
-  "/products/deleteProduct",
+  "products/deleteProduct",
   async (id) => {
-    const result = await axios.delete(
-      `http://localhost:5001/api/admin/products/delete/${id}`
+    const response = await axios.delete(
+      `${endpoints.admin.products.base}/delete/${id}`
     );
-
-    return result?.data;
+    return response.data;
   }
 );
 
-const AdminProductsSlice = createSlice({
+const adminProductsSlice = createSlice({
   name: "adminProducts",
   initialState,
   reducers: {},
@@ -75,11 +66,11 @@ const AdminProductsSlice = createSlice({
         state.isLoading = false;
         state.productList = action.payload.data;
       })
-      .addCase(fetchAllProducts.rejected, (state, action) => {
+      .addCase(fetchAllProducts.rejected, (state) => {
         state.isLoading = false;
         state.productList = [];
       });
   },
 });
 
-export default AdminProductsSlice.reducer;
+export default adminProductsSlice.reducer;
