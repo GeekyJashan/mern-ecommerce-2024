@@ -12,12 +12,8 @@ export default defineConfig({
   build: {
     outDir: "dist",
     sourcemap: false,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-        },
-      },
-    },
   },
+  optimizeDeps: {
+    include: ['tailwindcss', 'postcss', 'autoprefixer']
+  }
 });
