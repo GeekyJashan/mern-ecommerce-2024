@@ -53,6 +53,6 @@ app.use("/api/shop/search", shopSearchRouter);
 app.use("/api/shop/reviews", shopReviewRouter);
 app.use("/api/common/features", commonFeatureRouter);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
