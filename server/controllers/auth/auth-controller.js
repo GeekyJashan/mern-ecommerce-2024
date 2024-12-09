@@ -1,9 +1,8 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const User = require("../../models/User");
-
-const crypto = require('crypto');
-const sendEmail = require('../../utils/sendEmail'); // You'll need to create this
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import { User } from "../../models/User.js";
+import crypto from 'crypto';
+import {sendEmail} from '../../utils/sendEmail.js';
 
 const checkAuthStatus = async (req, res) => {
   try {
@@ -249,5 +248,12 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = { registerUser, loginUser, forgotPassword, 
-  resetPassword ,logoutUser, authMiddleware ,checkAuthStatus };
+export { 
+  registerUser, 
+  loginUser, 
+  forgotPassword, 
+  resetPassword,
+  logoutUser, 
+  authMiddleware,
+  checkAuthStatus 
+};

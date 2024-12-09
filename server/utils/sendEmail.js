@@ -1,21 +1,21 @@
-const nodemailer = require('nodemailer');
-require('dotenv').config();
+import nodemailer from "nodemailer";
+import dotenv from 'dotenv';
 
-const sendEmail = async ({ email, subject, message }) => {
+dotenv.config();
+
+export const sendEmail = async ({ email, subject, message }) => {
   try {
-    // Remove test account creation as we're using real credentials
     let transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD // Changed to match .env file
+        pass: process.env.EMAIL_PASSWORD
       },
       tls: {
         rejectUnauthorized: false
       }
     });
 
-    // Verify connection
     await transporter.verify();
     console.log('SMTP connection verified');
 
@@ -38,5 +38,3 @@ const sendEmail = async ({ email, subject, message }) => {
     return false;
   }
 };
-
-module.exports = sendEmail;
