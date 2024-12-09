@@ -201,9 +201,9 @@ const loginUser = async (req, res) => {
 
     res.cookie("token", token, { 
       httpOnly: true, 
-      secure: process.env.NODE_ENV === 'production', // true in production
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-      domain: process.env.NODE_ENV === 'production' ? '.onrender.com' : 'localhost'
+      secure: true,
+      sameSite: 'none',
+      domain: '.onrender.com'
     }).json({
       success: true,
       message: "Logged in successfully",
