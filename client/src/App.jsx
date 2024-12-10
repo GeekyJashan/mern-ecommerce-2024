@@ -33,6 +33,7 @@ function App() {
     (state) => state.auth
   );
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
     dispatch(checkAuth());
@@ -40,7 +41,7 @@ function App() {
 
   if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
 
-  console.log(isLoading, user);
+
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">

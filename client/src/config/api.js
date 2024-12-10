@@ -25,6 +25,6 @@ export const endpoints = {
     review: `${API_BASE_URL}/api/shop/review`,
   },
   common: {
-    feature: `${API_BASE_URL}/api/common/feature`,
+    feature: `${API_BASE_URL}/api/common/features`,
   },
 };

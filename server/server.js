@@ -16,20 +16,10 @@ import shopSearchRouter from "./routes/shop/search-routes.js";
 import shopReviewRouter from "./routes/shop/review-routes.js";
 
 import commonFeatureRouter from "./routes/common/feature-routes.js";
-import { sendEmail } from './utils/sendEmail.js';
+
 
 dotenv.config();
 
-// Test email configuration
-sendEmail({
-  email: process.env.EMAIL_USER,
-  subject: 'Test Email',
-  message: 'This is a test email'
-}).then(result => {
-  console.log('Email test result:', result);
-}).catch(err => {
-  console.error('Email test error:', err);
-});
 
 mongoose
   .connect(process.env.MONGODB_URI)

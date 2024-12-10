@@ -30,7 +30,7 @@ export const checkAuth = createAsyncThunk("auth/checkAuth", async () => {
   return response.data;
 });
 
-export const logoutUser = createAsyncThunk("auth/logout", async () => {
+export const logoutUser = createAsyncThunk("auth/logout", async (_, { dispatch }) => {
   const response = await axios.post(
     endpoints.auth.logout,
     {},
@@ -38,6 +38,9 @@ export const logoutUser = createAsyncThunk("auth/logout", async () => {
       withCredentials: true,
     }
   );
+  if (response.data.success) {
+    window.location.href = '/auth/login';
+  }
   return response.data;
 });
 

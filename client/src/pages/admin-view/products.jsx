@@ -46,7 +46,15 @@ function AdminProducts() {
 
   function onSubmit(event) {
     event.preventDefault();
-
+  
+    if (!uploadedImageUrl && !currentEditedId) {
+      toast({
+        title: "Please upload an image first",
+        variant: "destructive"
+      });
+      return;
+    }
+  
     currentEditedId !== null
       ? dispatch(
           editProduct({
@@ -54,8 +62,6 @@ function AdminProducts() {
             formData,
           })
         ).then((data) => {
-          console.log(data, "edit");
-
           if (data?.payload?.success) {
             dispatch(fetchAllProducts());
             setFormData(initialFormData);
@@ -75,7 +81,7 @@ function AdminProducts() {
             setImageFile(null);
             setFormData(initialFormData);
             toast({
-              title: "Product add successfully",
+              title: "Product added successfully",
             });
           }
         });
